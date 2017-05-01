@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
     devtool: 'source-map',
-    entry: './src/app.js',
+    entry: './src/ko-todo.module.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'

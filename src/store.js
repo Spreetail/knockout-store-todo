@@ -1,7 +1,14 @@
-const state = {
-    selectedProject: ko.observable()
+const stateObservable = ko.observable({});
+
+function setState(state) {
+    stateObservable(state);
+}
+
+function getState() {
+    return stateObservable;
+}
+
+export {
+    setState,
+    getState
 };
-
-state.selectedProject.subscribe((value) => console.log(value));
-
-export default state;

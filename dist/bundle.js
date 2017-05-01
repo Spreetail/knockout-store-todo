@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,29 +73,50 @@
 "use strict";
 
 
-var _appTemplate = __webpack_require__(14);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var stateObservable = ko.observable({});
 
-var _appTemplate2 = _interopRequireDefault(_appTemplate);
+function setState(state) {
+    stateObservable(state);
+}
 
-var _appViewmodel = __webpack_require__(3);
+function getState() {
+    return stateObservable;
+}
 
-var _appViewmodel2 = _interopRequireDefault(_appViewmodel);
-
-__webpack_require__(13);
-
-__webpack_require__(7);
-
-__webpack_require__(9);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-ko.components.register('app', { template: _appTemplate2.default, viewModel: _appViewmodel2.default });
+exports.setState = setState;
+exports.getState = getState;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _store = __webpack_require__(0);
+
+function connect(mapStateToParams, mergeProps) {
+    if (typeof mergeProps !== 'function') {
+        mergeProps = Object.assign.bind(null, {});
+    }
+    return function (ViewModel) {
+        return function (params) {
+            var state = (0, _store.getState)();
+            var stateParams = mapStateToParams(state());
+            var mergedParams = mergeProps(params, stateParams);
+            return new ViewModel(mergedParams);
+        };
+    };
+}
+
+exports.default = connect;
 
 /***/ }),
 /* 2 */
@@ -104,28 +125,49 @@ ko.components.register('app', { template: _appTemplate2.default, viewModel: _app
 "use strict";
 
 
-__webpack_require__(1);
+var _appTemplate = __webpack_require__(15);
 
-__webpack_require__(0);
+var _appTemplate2 = _interopRequireDefault(_appTemplate);
 
-var _provider = __webpack_require__(9);
+var _appViewmodel = __webpack_require__(5);
 
-var _provider2 = _interopRequireDefault(_provider);
+var _appViewmodel2 = _interopRequireDefault(_appViewmodel);
 
-var _store = __webpack_require__(12);
+__webpack_require__(14);
 
-var _store2 = _interopRequireDefault(_store);
+__webpack_require__(9);
+
+__webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-ko.deferUpdates = true;
-
-(0, _provider2.default)(_store2.default);
-
-ko.applyBindings();
+ko.components.register('app', { template: _appTemplate2.default, viewModel: _appViewmodel2.default });
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var projects = {
+    Work: ['Talk to Jeff', 'Fix bug', 'Schedule Meeting'],
+    Home: ['Call Mom', 'Make Dinner']
+};
+
+exports.default = projects;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -150,17 +192,17 @@ function appViewModel() {
 exports.default = appViewModel;
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _linkListTemplate = __webpack_require__(15);
+var _linkListTemplate = __webpack_require__(16);
 
 var _linkListTemplate2 = _interopRequireDefault(_linkListTemplate);
 
-var _linkListViewmodel = __webpack_require__(5);
+var _linkListViewmodel = __webpack_require__(7);
 
 var _linkListViewmodel2 = _interopRequireDefault(_linkListViewmodel);
 
@@ -169,7 +211,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ko.components.register('link-list', { template: _linkListTemplate2.default, viewModel: _linkListViewmodel2.default });
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -179,7 +221,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _listItem = __webpack_require__(6);
+var _listItem = __webpack_require__(8);
 
 var _listItem2 = _interopRequireDefault(_listItem);
 
@@ -206,7 +248,7 @@ function linkListViewModel(params) {
 exports.default = linkListViewModel;
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -229,21 +271,19 @@ function listItem(name, id) {
 exports.default = listItem;
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(4);
+__webpack_require__(6);
 
-__webpack_require__(11);
-
-var _projectListTemplate = __webpack_require__(16);
+var _projectListTemplate = __webpack_require__(17);
 
 var _projectListTemplate2 = _interopRequireDefault(_projectListTemplate);
 
-var _projectListViewmodel = __webpack_require__(8);
+var _projectListViewmodel = __webpack_require__(10);
 
 var _projectListViewmodel2 = _interopRequireDefault(_projectListViewmodel);
 
@@ -252,7 +292,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ko.components.register('project-list', { template: _projectListTemplate2.default, viewModel: _projectListViewmodel2.default });
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -262,7 +302,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _connect = __webpack_require__(10);
+var _connect = __webpack_require__(1);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -286,105 +326,23 @@ function mapStateToParams(_ref) {
 exports.default = (0, _connect2.default)(mapStateToParams)(projectListViewModel);
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _providerTemplate = __webpack_require__(32);
-
-var _providerTemplate2 = _interopRequireDefault(_providerTemplate);
-
-var _providerViewmodel = __webpack_require__(33);
-
-var _providerViewmodel2 = _interopRequireDefault(_providerViewmodel);
-
-var _store = __webpack_require__(34);
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function registerStore(appState) {
-    (0, _store2.default)(appState);
-    _providerViewmodel2.default.bind(null, { appState: appState });
-    ko.components.register('provider', { template: _providerTemplate2.default, viewModel: _providerViewmodel2.default });
-}
-
-exports.default = registerStore;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _store = __webpack_require__(34);
-
-function connect(mapStateToParams, mergeProps) {
-    if (typeof mergeProps !== 'function') {
-        mergeProps = Object.assign.bind(null, {});
-    }
-    var stateParams = mapStateToParams(_store.state);
-    return function (ViewModel) {
-        return function (params) {
-            var mergedParams = mergeProps(params, stateParams);
-            return new ViewModel(mergedParams);
-        };
-    };
-}
-
-exports.default = connect;
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var hasOwn = Object.prototype.hasOwnProperty;
-var storeProviderBindingName = 'storeProvider';
+var _taskList = __webpack_require__(12);
 
-ko.bindingHandlers.storeConsumer = {
-    init: function init(element, valueAccessor, allBindings, viewModel, bindingContext) {
-        var parent = element.parentElement;
-        var provider = void 0;
-        while (parent !== null && typeof provider === 'undefined') {
-            var bindings = void 0;
-            try {
-                bindings = ko.bindingProvider.instance.getBindings(parent, ko.contextFor(parent));
-            } catch (error) {
-                if (!(error instanceof TypeError)) {
-                    throw error;
-                }
-            }
-            if (bindings !== null && hasOwn.call(bindings, storeProviderBindingName)) {
-                provider = bindings;
-            }
-            parent = parent.parentElement;
-        }
-        if (typeof provider === 'undefined') {
-            console.error('No storeProvider binding found for storeConsumer.');
-        } else {
-            var store = provider[storeProviderBindingName];
-            if (typeof store === 'undefined') {
-                console.error('No store found from storeProvider binding.');
-            }
-            bindingContext.$data.store = store;
-        }
-    }
-};
+var _taskList2 = _interopRequireDefault(_taskList);
+
+var _taskListTemplate = __webpack_require__(18);
+
+var _taskListTemplate2 = _interopRequireDefault(_taskListTemplate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+ko.components.register('task-list', { viewModel: _taskList2.default, template: _taskListTemplate2.default });
 
 /***/ }),
 /* 12 */
@@ -396,95 +354,95 @@ ko.bindingHandlers.storeConsumer = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var state = {
-    selectedProject: ko.observable()
-};
 
-state.selectedProject.subscribe(function (value) {
-    return console.log(value);
-});
+var _connect = __webpack_require__(1);
 
-exports.default = state;
+var _connect2 = _interopRequireDefault(_connect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function taskListViewModel(params) {
+    var vm = {};
+    vm.title = ko.computed(function () {
+        return params.selectedProject() + ' Tasks';
+    });
+    vm.tasks = params.selectedTasks;
+    return vm;
+}
+
+function mapStateToParams(_ref) {
+    var selectedProject = _ref.selectedProject,
+        selectedTasks = _ref.selectedTasks;
+
+    return { selectedProject: selectedProject, selectedTasks: selectedTasks };
+}
+
+exports.default = (0, _connect2.default)(mapStateToParams)(taskListViewModel);
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
+
+
+var _store = __webpack_require__(0);
+
+__webpack_require__(4);
+
+__webpack_require__(2);
+
+var _projects = __webpack_require__(3);
+
+var _projects2 = _interopRequireDefault(_projects);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    projects: ko.observableArray([Object.keys(_projects2.default)]),
+    selectedProject: ko.observable(),
+    selectedTasks: ko.observableArray([])
+};
+
+state.selectedProject.subscribe(function (newValue) {
+    state.selectedTasks(_projects2.default[newValue]);
+});
+
+(0, _store.setState)(state);
+
+ko.deferUpdates = true;
+
+ko.applyBindings();
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = "<main>\r\n    <project-list params=\"projectListItems: projectListItems\" />\r\n</main>\r\n";
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list-group\" data-bind=\"foreach: items\">\r\n    <a class=\"list-group-item\" data-bind=\"attr: { 'href': href },\r\n        text: name,\r\n        css: { 'active': isSelected },\r\n        click: $parent.selectItem\"></a>\r\n</div>\r\n";
+module.exports = "<main>\r\n    <div class=\"col-sm-3\">\r\n        <project-list params=\"projectListItems: projectListItems\" />\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        <task-list />\r\n    </div>\r\n</main>\r\n";
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-3\">\r\n    <h1>Projects</h1>\r\n    <link-list params=\"items: projectListItems, selectHandler: selectHandler\" />\r\n</div>\r\n";
+module.exports = "<div class=\"list-group\" data-bind=\"foreach: items\">\r\n    <a class=\"list-group-item\" data-bind=\"attr: { 'href': href },\r\n        text: name,\r\n        css: { 'active': isSelected },\r\n        click: $parent.selectItem\"></a>\r\n</div>\r\n";
 
 /***/ }),
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */
+/* 17 */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- ko storeProvider: store -->\r\n<!-- ko template: { nodes: $componentTemplateNodes } --><!-- /ko -->\r\n<!-- /ko -->\r\n";
+module.exports = "<h1>Projects</h1>\r\n<link-list params=\"items: projectListItems, selectHandler: selectHandler\" />\r\n";
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 18 */
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-function providerViewModel(params) {
-    var vm = {};
-    vm.store = params.store;
-    return vm;
-}
-
-exports.default = providerViewModel;
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (newState) {
-    exports.state = state = newState;
-};
-
-var state = exports.state = void 0;
+module.exports = "<h1 data-bind=\"text: title\"></h1>\r\n<ul data-bind=\"foreach: tasks\">\r\n    <li data-bind=\"text: $data\"></li>\r\n</ul>\r\n";
 
 /***/ })
 /******/ ]);

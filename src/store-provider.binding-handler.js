@@ -1,3 +1,0 @@
-ko.bindingHandlers.storeConsumer = {
-    init: () => {}
-};
