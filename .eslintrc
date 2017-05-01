@@ -1,0 +1,9 @@
+{
+    "extends": "spreetail",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "globals": {
+        "ko": true
+    }
+}
