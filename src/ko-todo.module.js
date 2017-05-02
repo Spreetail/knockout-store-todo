@@ -1,4 +1,4 @@
-import { setState } from './store';
+import { setState } from 'knockout-store';
 import 'bootstrap/dist/css/bootstrap.css';
 import './components/app';
 import projects from './data/projects';
@@ -19,7 +19,7 @@ state.selectedTasks.subscribe((newValue) => {
     projects[state.selectedProject()] = newValue;
 });
 
-setState(state);
+ko.store.setState(state);
 
 ko.applyBindings();
 

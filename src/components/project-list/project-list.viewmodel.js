@@ -1,4 +1,4 @@
-import connect from '../../connect.js';
+import { connect } from 'knockout-store';
 
 function projectListViewModel(params) {
     const vm = {};
@@ -13,4 +13,4 @@ function mapStateToParams({ selectedProject, projects }) {
     return { selectedProject, projects };
 }
 
-export default connect(mapStateToParams)(projectListViewModel);
+export default ko.store.connect(mapStateToParams)(projectListViewModel);
