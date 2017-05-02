@@ -1,14 +1,14 @@
 import { getState } from './store';
 
-function connect(mapStateToParams, mergeProps) {
-    if (typeof mergeProps !== 'function') {
-        mergeProps = Object.assign.bind(null, {});
+function connect(mapStateToParams, mergeParams) {
+    if (typeof mergeParams !== 'function') {
+        mergeParams = Object.assign.bind(null, {});
     }
     return function(ViewModel) {
         return function (params) {
             const state = getState();
-            const stateParams = mapStateToParams(state());
-            const mergedParams = mergeProps(params, stateParams);
+            const stateParams = mapStateToParams(state(), params);
+            const mergedParams = mergeParams(params, stateParams);
             return new ViewModel(mergedParams);
         };
     };
