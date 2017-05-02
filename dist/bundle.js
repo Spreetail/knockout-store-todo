@@ -96,6 +96,25 @@ exports.getState = getState;
 "use strict";
 
 
+var _linkListTemplate = __webpack_require__(16);
+
+var _linkListTemplate2 = _interopRequireDefault(_linkListTemplate);
+
+var _linkListViewmodel = __webpack_require__(7);
+
+var _linkListViewmodel2 = _interopRequireDefault(_linkListViewmodel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+ko.components.register('link-list', { template: _linkListTemplate2.default, viewModel: _linkListViewmodel2.default });
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -119,7 +138,7 @@ function connect(mapStateToParams, mergeProps) {
 exports.default = connect;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -129,7 +148,7 @@ var _appTemplate = __webpack_require__(15);
 
 var _appTemplate2 = _interopRequireDefault(_appTemplate);
 
-var _appViewmodel = __webpack_require__(5);
+var _appViewmodel = __webpack_require__(6);
 
 var _appViewmodel2 = _interopRequireDefault(_appViewmodel);
 
@@ -144,7 +163,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ko.components.register('app', { template: _appTemplate2.default, viewModel: _appViewmodel2.default });
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -161,13 +180,13 @@ var projects = {
 exports.default = projects;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,37 +197,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 function appViewModel() {
-    return {
-        projectListItems: [{
-            name: 'Work',
-            id: 'work'
-        }, {
-            name: 'Home',
-            id: 'home'
-        }]
-    };
+    return {};
 }
 
 exports.default = appViewModel;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _linkListTemplate = __webpack_require__(16);
-
-var _linkListTemplate2 = _interopRequireDefault(_linkListTemplate);
-
-var _linkListViewmodel = __webpack_require__(7);
-
-var _linkListViewmodel2 = _interopRequireDefault(_linkListViewmodel);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-ko.components.register('link-list', { template: _linkListTemplate2.default, viewModel: _linkListViewmodel2.default });
 
 /***/ }),
 /* 7 */
@@ -230,13 +222,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function linkListViewModel(params) {
     var selectHandler = typeof params.selectHandler === 'function' ? params.selectHandler : function () {};
     var vm = {};
-    vm.items = params.items().map(function (_ref) {
-        var name = _ref.name,
-            id = _ref.id;
-        return (0, _listItem2.default)(name, id);
+    vm.items = ko.computed(function () {
+        return params.items().map(function (_ref) {
+            var name = _ref.name,
+                id = _ref.id;
+            return (0, _listItem2.default)(name, id);
+        });
     });
     vm.selectItem = function (selectedItem) {
-        vm.items.forEach(function (item) {
+        vm.items().forEach(function (item) {
             item.isSelected(false);
         });
         selectedItem.isSelected(true);
@@ -277,7 +271,7 @@ exports.default = listItem;
 "use strict";
 
 
-__webpack_require__(6);
+__webpack_require__(1);
 
 var _projectListTemplate = __webpack_require__(17);
 
@@ -302,7 +296,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _connect = __webpack_require__(1);
+var _connect = __webpack_require__(2);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -310,7 +304,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function projectListViewModel(params) {
     var vm = {};
-    vm.projectListItems = ko.observableArray(params.projectListItems);
+    vm.projectListItems = ko.computed(function () {
+        return params.projects().map(function (name) {
+            return { name: name, id: name };
+        });
+    });
     vm.selectHandler = function (selectedProject) {
         return params.selectedProject(selectedProject.name());
     };
@@ -318,9 +316,10 @@ function projectListViewModel(params) {
 }
 
 function mapStateToParams(_ref) {
-    var selectedProject = _ref.selectedProject;
+    var selectedProject = _ref.selectedProject,
+        projects = _ref.projects;
 
-    return { selectedProject: selectedProject };
+    return { selectedProject: selectedProject, projects: projects };
 }
 
 exports.default = (0, _connect2.default)(mapStateToParams)(projectListViewModel);
@@ -331,6 +330,8 @@ exports.default = (0, _connect2.default)(mapStateToParams)(projectListViewModel)
 
 "use strict";
 
+
+__webpack_require__(1);
 
 var _taskList = __webpack_require__(12);
 
@@ -355,7 +356,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _connect = __webpack_require__(1);
+var _connect = __webpack_require__(2);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -366,13 +367,27 @@ function taskListViewModel(params) {
     vm.title = ko.computed(function () {
         return params.selectedProject() + ' Tasks';
     });
-    vm.tasks = params.selectedTasks;
+    vm.tasks = ko.computed(function () {
+        return params.selectedTasks().map(function (text) {
+            return { name: text, id: text };
+        });
+    });
+    vm.tasksEmpty = ko.computed(function () {
+        return vm.tasks().length === 0;
+    });
+    vm.markComplete = function (_ref) {
+        var name = _ref.name;
+
+        params.selectedTasks(params.selectedTasks().filter(function (task) {
+            return task !== name();
+        }));
+    };
     return vm;
 }
 
-function mapStateToParams(_ref) {
-    var selectedProject = _ref.selectedProject,
-        selectedTasks = _ref.selectedTasks;
+function mapStateToParams(_ref2) {
+    var selectedProject = _ref2.selectedProject,
+        selectedTasks = _ref2.selectedTasks;
 
     return { selectedProject: selectedProject, selectedTasks: selectedTasks };
 }
@@ -388,18 +403,20 @@ exports.default = (0, _connect2.default)(mapStateToParams)(taskListViewModel);
 
 var _store = __webpack_require__(0);
 
-__webpack_require__(4);
+__webpack_require__(5);
 
-__webpack_require__(2);
+__webpack_require__(3);
 
-var _projects = __webpack_require__(3);
+var _projects = __webpack_require__(4);
 
 var _projects2 = _interopRequireDefault(_projects);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+ko.deferUpdates = true;
+
 var state = {
-    projects: ko.observableArray([Object.keys(_projects2.default)]),
+    projects: ko.observableArray([]),
     selectedProject: ko.observable(),
     selectedTasks: ko.observableArray([])
 };
@@ -408,11 +425,15 @@ state.selectedProject.subscribe(function (newValue) {
     state.selectedTasks(_projects2.default[newValue]);
 });
 
+state.selectedTasks.subscribe(function (newValue) {
+    _projects2.default[state.selectedProject()] = newValue;
+});
+
 (0, _store.setState)(state);
 
-ko.deferUpdates = true;
-
 ko.applyBindings();
+
+state.projects(Object.keys(_projects2.default));
 
 /***/ }),
 /* 14 */
@@ -424,7 +445,7 @@ ko.applyBindings();
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = "<main>\r\n    <div class=\"col-sm-3\">\r\n        <project-list params=\"projectListItems: projectListItems\" />\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        <task-list />\r\n    </div>\r\n</main>\r\n";
+module.exports = "<main>\r\n    <div class=\"col-sm-3\">\r\n        <project-list />\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        <task-list />\r\n    </div>\r\n</main>\r\n";
 
 /***/ }),
 /* 16 */
@@ -442,7 +463,7 @@ module.exports = "<h1>Projects</h1>\r\n<link-list params=\"items: projectListIte
 /* 18 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 data-bind=\"text: title\"></h1>\r\n<ul data-bind=\"foreach: tasks\">\r\n    <li data-bind=\"text: $data\"></li>\r\n</ul>\r\n";
+module.exports = "<h1 data-bind=\"text: title\"></h1>\r\n<link-list params=\"items: tasks, selectHandler: markComplete\"></link-list>\r\n<div data-bind=\"visible: tasksEmpty\">\r\n    <h3>All done!</h3>\r\n</div>\r\n";
 
 /***/ })
 /******/ ]);

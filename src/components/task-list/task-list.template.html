@@ -1,4 +1,5 @@
 <h1 data-bind="text: title"></h1>
-<ul data-bind="foreach: tasks">
-    <li data-bind="text: $data"></li>
-</ul>
+<link-list params="items: tasks, selectHandler: markComplete"></link-list>
+<div data-bind="visible: tasksEmpty">
+    <h3>All done!</h3>
+</div>

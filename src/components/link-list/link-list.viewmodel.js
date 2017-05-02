@@ -5,9 +5,9 @@ function linkListViewModel(params) {
         params.selectHandler :
         () => {};
     const vm = {};
-    vm.items = params.items().map(({ name, id }) => listItem(name, id));
+    vm.items = ko.computed(() => params.items().map(({ name, id }) => listItem(name, id)));
     vm.selectItem = (selectedItem) => {
-        vm.items.forEach((item) => {
+        vm.items().forEach((item) => {
             item.isSelected(false);
         });
         selectedItem.isSelected(true);

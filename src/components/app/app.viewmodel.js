@@ -1,14 +1,6 @@
 
 function appViewModel() {
-    return {
-        projectListItems: [{
-            name: 'Work',
-            id: 'work'
-        }, {
-            name: 'Home',
-            id: 'home'
-        }]
-    };
+    return {};
 }
 
 export default appViewModel;
