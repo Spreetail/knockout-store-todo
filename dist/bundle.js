@@ -375,6 +375,9 @@ function taskListViewModel(params) {
     vm.tasksEmpty = ko.computed(function () {
         return vm.tasks().length === 0;
     });
+    vm.projectSelected = ko.computed(function () {
+        return typeof params.selectedProject() !== 'undefined';
+    });
     vm.markComplete = function (_ref) {
         var name = _ref.name;
 
@@ -463,7 +466,7 @@ module.exports = "<h1>Projects</h1>\r\n<link-list params=\"items: projectListIte
 /* 18 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 data-bind=\"text: title\"></h1>\r\n<link-list params=\"items: tasks, selectHandler: markComplete\"></link-list>\r\n<div data-bind=\"visible: tasksEmpty\">\r\n    <h3>All done!</h3>\r\n</div>\r\n";
+module.exports = "<div data-bind=\"visible: projectSelected\">\r\n    <h1 data-bind=\"text: title\"></h1>\r\n    <link-list params=\"items: tasks, selectHandler: markComplete\"></link-list>\r\n    <div data-bind=\"visible: tasksEmpty\">\r\n        <h3>All done!</h3>\r\n    </div>\r\n</div>\r\n";
 
 /***/ })
 /******/ ]);

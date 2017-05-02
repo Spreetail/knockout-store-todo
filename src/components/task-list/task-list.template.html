@@ -1,5 +1,7 @@
-<h1 data-bind="text: title"></h1>
-<link-list params="items: tasks, selectHandler: markComplete"></link-list>
-<div data-bind="visible: tasksEmpty">
-    <h3>All done!</h3>
+<div data-bind="visible: projectSelected">
+    <h1 data-bind="text: title"></h1>
+    <link-list params="items: tasks, selectHandler: markComplete"></link-list>
+    <div data-bind="visible: tasksEmpty">
+        <h3>All done!</h3>
+    </div>
 </div>

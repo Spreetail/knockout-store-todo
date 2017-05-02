@@ -7,6 +7,7 @@ function taskListViewModel(params) {
         return { name: text, id: text };
     }));
     vm.tasksEmpty = ko.computed(() => vm.tasks().length === 0);
+    vm.projectSelected = ko.computed(() => typeof params.selectedProject() !== 'undefined');
     vm.markComplete = ({ name }) => {
         params.selectedTasks(params.selectedTasks().filter((task) => task !== name()));
     };
