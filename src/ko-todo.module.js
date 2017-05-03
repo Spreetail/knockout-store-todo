@@ -1,3 +1,4 @@
+import ko from 'knockout';
 import { setState } from 'knockout-store';
 import projects from './data/projects';
 import 'bootstrap/dist/css/bootstrap.css';

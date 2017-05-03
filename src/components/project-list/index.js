@@ -1,3 +1,4 @@
+import ko from 'knockout';
 import template from './project-list.template.html';
 import viewModel from './project-list.viewmodel.js';
 

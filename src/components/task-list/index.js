@@ -1,3 +1,4 @@
+import ko from 'knockout';
 import viewModel from './task-list.viewmodel';
 import template from './task-list.template.html';
 import '../task-input';

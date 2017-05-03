@@ -1,7 +1,7 @@
 {
   "name": "knockout-store-todo",
   "version": "1.0.0",
-  "description": "Todo example utilizing knockout-store.",
+  "description": "Example Knockout To Do app utilizing knockout-store state management.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
