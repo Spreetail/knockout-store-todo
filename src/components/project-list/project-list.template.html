@@ -1,2 +1,7 @@
 <h1>Projects</h1>
-<link-list params="items: projectListItems, selectHandler: selectHandler" />
+<div class="list-group" data-bind="foreach: projects">
+    <a href="#" class="list-group-item" data-bind="click: $parent.projectClicked">
+        <span data-bind="text: name"></span>
+        <span class="badge" data-bind="text: tasks().length"></span>
+    </a>
+</div>

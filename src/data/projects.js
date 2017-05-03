@@ -1,6 +1,11 @@
-const projects = {
-    Work: ['Talk to Jeff', 'Fix bug', 'Schedule Meeting'],
-    Home: ['Call Mom', 'Make Dinner']
-};
+const projects = [
+    {
+        name: 'Work',
+        tasks: ['Talk to Jeff', 'Fix bug', 'Schedule Meeting']
+    }, {
+        name: 'Home',
+        tasks: ['Call Mom', 'Make Dinner']
+    }
+];
 
 export default projects;

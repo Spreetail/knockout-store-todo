@@ -63,53 +63,50 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__connect__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(2);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "setState", function() { return __WEBPACK_IMPORTED_MODULE_1__store__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return __WEBPACK_IMPORTED_MODULE_1__store__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_0__connect__["a"]; });
 
 
-var _linkListTemplate = __webpack_require__(15);
 
-var _linkListTemplate2 = _interopRequireDefault(_linkListTemplate);
 
-var _linkListViewmodel = __webpack_require__(6);
 
-var _linkListViewmodel2 = _interopRequireDefault(_linkListViewmodel);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-ko.components.register('link-list', { template: _linkListTemplate2.default, viewModel: _linkListViewmodel2.default });
 
 /***/ }),
+/* 1 */,
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_knockout__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getState; });
 
 
-var _appTemplate = __webpack_require__(14);
+const stateObservable = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.observable();
 
-var _appTemplate2 = _interopRequireDefault(_appTemplate);
+function setState(state) {
+    stateObservable(state);
+}
 
-var _appViewmodel = __webpack_require__(5);
+function getState() {
+    return stateObservable;
+}
 
-var _appViewmodel2 = _interopRequireDefault(_appViewmodel);
 
-__webpack_require__(13);
 
-__webpack_require__(8);
-
-__webpack_require__(10);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-ko.components.register('app', { template: _appTemplate2.default, viewModel: _appViewmodel2.default });
 
 /***/ }),
 /* 3 */
@@ -118,24 +115,26 @@ ko.components.register('app', { template: _appTemplate2.default, viewModel: _app
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var projects = {
-    Work: ['Talk to Jeff', 'Fix bug', 'Schedule Meeting'],
-    Home: ['Call Mom', 'Make Dinner']
-};
+var _appTemplate = __webpack_require__(15);
 
-exports.default = projects;
+var _appTemplate2 = _interopRequireDefault(_appTemplate);
+
+var _appViewmodel = __webpack_require__(6);
+
+var _appViewmodel2 = _interopRequireDefault(_appViewmodel);
+
+__webpack_require__(14);
+
+__webpack_require__(9);
+
+__webpack_require__(11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+ko.components.register('app', { template: _appTemplate2.default, viewModel: _appViewmodel2.default });
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -144,12 +143,21 @@ exports.default = projects;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var projects = [{
+    name: 'Work',
+    tasks: ['Talk to Jeff', 'Fix bug', 'Schedule Meeting']
+}, {
+    name: 'Home',
+    tasks: ['Call Mom', 'Make Dinner']
+}];
 
-function appViewModel() {
-    return {};
-}
+exports.default = projects;
 
-exports.default = appViewModel;
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 6 */
@@ -161,72 +169,26 @@ exports.default = appViewModel;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _listItem = __webpack_require__(7);
-
-var _listItem2 = _interopRequireDefault(_listItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function linkListViewModel(params) {
-    var selectHandler = typeof params.selectHandler === 'function' ? params.selectHandler : function () {};
-    var vm = {};
-    vm.items = ko.computed(function () {
-        return params.items().map(function (_ref) {
-            var name = _ref.name,
-                id = _ref.id;
-            return (0, _listItem2.default)(name, id);
-        });
-    });
-    vm.selectItem = function (selectedItem) {
-        vm.items().forEach(function (item) {
-            item.isSelected(false);
-        });
-        selectedItem.isSelected(true);
-        selectHandler(selectedItem);
-    };
-    return vm;
+function appViewModel() {
+    return {};
 }
 
-exports.default = linkListViewModel;
+exports.default = appViewModel;
 
 /***/ }),
-/* 7 */
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-function listItem(name, id) {
-    var vm = {};
-    vm.name = ko.observable(name);
-    vm.id = ko.observable(id);
-    vm.isSelected = ko.observable(false);
-    vm.href = ko.computed(function () {
-        return '#' + id;
-    });
-    return vm;
-}
-
-exports.default = listItem;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(1);
-
-var _projectListTemplate = __webpack_require__(16);
+var _projectListTemplate = __webpack_require__(17);
 
 var _projectListTemplate2 = _interopRequireDefault(_projectListTemplate);
 
-var _projectListViewmodel = __webpack_require__(9);
+var _projectListViewmodel = __webpack_require__(10);
 
 var _projectListViewmodel2 = _interopRequireDefault(_projectListViewmodel);
 
@@ -235,7 +197,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ko.components.register('project-list', { template: _projectListTemplate2.default, viewModel: _projectListViewmodel2.default });
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -245,18 +207,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _knockoutStore = __webpack_require__(34);
+var _knockoutStore = __webpack_require__(0);
 
 function projectListViewModel(params) {
     var vm = {};
-    vm.projectListItems = ko.computed(function () {
-        return params.projects().map(function (name) {
-            return { name: name, id: name };
-        });
-    });
-    vm.selectHandler = function (selectedProject) {
-        return params.selectedProject(selectedProject.name());
-    };
+    vm.projects = params.projects;
+    function selectProject(selectedProject) {
+        params.selectedProject(selectedProject);
+    }
+    vm.projectClicked = selectProject;
     return vm;
 }
 
@@ -270,28 +229,30 @@ function mapStateToParams(_ref) {
 exports.default = (0, _knockoutStore.connect)(mapStateToParams)(projectListViewModel);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(1);
-
-var _taskList = __webpack_require__(11);
+var _taskList = __webpack_require__(12);
 
 var _taskList2 = _interopRequireDefault(_taskList);
 
-var _taskListTemplate = __webpack_require__(17);
+var _taskListTemplate = __webpack_require__(18);
 
 var _taskListTemplate2 = _interopRequireDefault(_taskListTemplate);
+
+__webpack_require__(36);
+
+__webpack_require__(39);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 ko.components.register('task-list', { viewModel: _taskList2.default, template: _taskListTemplate2.default });
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -301,37 +262,35 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _knockoutStore = __webpack_require__(34);
+var _knockoutStore = __webpack_require__(0);
 
 function taskListViewModel(params) {
     var vm = {};
     vm.title = ko.computed(function () {
-        return params.selectedProject() + ' Tasks';
+        if (typeof params.selectedProject() !== 'undefined') {
+            return params.selectedProject().name() + ' Title';
+        }
+        return '';
     });
-    vm.tasks = ko.computed(function () {
-        return params.selectedTasks().map(function (text) {
-            return { name: text, id: text };
-        });
-    });
+    vm.tasks = params.selectedTasks;
     vm.tasksEmpty = ko.computed(function () {
         return vm.tasks().length === 0;
     });
     vm.projectSelected = ko.computed(function () {
         return typeof params.selectedProject() !== 'undefined';
     });
-    vm.markComplete = function (_ref) {
-        var name = _ref.name;
-
+    function markTaskComplete(completedTask) {
         params.selectedTasks(params.selectedTasks().filter(function (task) {
-            return task !== name();
+            return task !== completedTask;
         }));
-    };
+    }
+    vm.taskClicked = markTaskComplete;
     return vm;
 }
 
-function mapStateToParams(_ref2) {
-    var selectedProject = _ref2.selectedProject,
-        selectedTasks = _ref2.selectedTasks;
+function mapStateToParams(_ref) {
+    var selectedProject = _ref.selectedProject,
+        selectedTasks = _ref.selectedTasks;
 
     return { selectedProject: selectedProject, selectedTasks: selectedTasks };
 }
@@ -339,21 +298,21 @@ function mapStateToParams(_ref2) {
 exports.default = (0, _knockoutStore.connect)(mapStateToParams)(taskListViewModel);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _knockoutStore = __webpack_require__(34);
+var _knockoutStore = __webpack_require__(0);
 
-__webpack_require__(4);
-
-__webpack_require__(2);
-
-var _projects = __webpack_require__(3);
+var _projects = __webpack_require__(4);
 
 var _projects2 = _interopRequireDefault(_projects);
+
+__webpack_require__(5);
+
+__webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -365,52 +324,91 @@ var state = {
     selectedTasks: ko.observableArray([])
 };
 
-state.selectedProject.subscribe(function (newValue) {
-    state.selectedTasks(_projects2.default[newValue]);
+state.selectedProject.subscribe(function (project) {
+    state.selectedTasks(project.tasks());
 });
 
-state.selectedTasks.subscribe(function (newValue) {
-    _projects2.default[state.selectedProject()] = newValue;
+state.selectedTasks.subscribe(function (tasks) {
+    state.selectedProject().tasks(tasks);
 });
 
 (0, _knockoutStore.setState)(state);
+//simulated data fetch
+setTimeout(function () {
+    var observableProjects = _projects2.default.map(function (_ref) {
+        var name = _ref.name,
+            tasks = _ref.tasks;
+
+        return {
+            name: ko.observable(name),
+            tasks: ko.observableArray(tasks)
+        };
+    });
+    state.projects(observableProjects);
+}, 100);
 
 ko.applyBindings();
-
-state.projects(Object.keys(_projects2.default));
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = "<main>\r\n    <div class=\"col-sm-3\">\r\n        <project-list />\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        <task-list />\r\n    </div>\r\n</main>\r\n";
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list-group\" data-bind=\"foreach: items\">\r\n    <a class=\"list-group-item\" data-bind=\"attr: { 'href': href },\r\n        text: name,\r\n        css: { 'active': isSelected },\r\n        click: $parent.selectItem\"></a>\r\n</div>\r\n";
+module.exports = "<main>\r\n    <div class=\"col-sm-3\">\r\n        <project-list />\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        <task-list />\r\n    </div>\r\n</main>\r\n";
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>Projects</h1>\r\n<link-list params=\"items: projectListItems, selectHandler: selectHandler\" />\r\n";
-
-/***/ }),
+/* 16 */,
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = "<div data-bind=\"visible: projectSelected\">\r\n    <h1 data-bind=\"text: title\"></h1>\r\n    <link-list params=\"items: tasks, selectHandler: markComplete\"></link-list>\r\n    <div data-bind=\"visible: tasksEmpty\">\r\n        <h3>All done!</h3>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<h1>Projects</h1>\r\n<div class=\"list-group\" data-bind=\"foreach: projects\">\r\n    <a href=\"#\" class=\"list-group-item\" data-bind=\"click: $parent.projectClicked\">\r\n        <span data-bind=\"text: name\"></span>\r\n        <span class=\"badge\" data-bind=\"text: tasks().length\"></span>\r\n    </a>\r\n</div>\r\n";
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports) {
+
+module.exports = "<div data-bind=\"visible: projectSelected\">\r\n    <h1 data-bind=\"text: title\"></h1>\r\n    <task-input></task-input>\r\n    <div class=\"task-list\">\r\n        <div class=\"list-group\" data-bind=\"foreach: tasks\">\r\n            <a href=\"#\" class=\"list-group-item\" data-bind=\"text: $data, click: $parent.taskClicked\"></a>\r\n        </div>\r\n        <div data-bind=\"visible: tasksEmpty\">\r\n            <h3>All done!</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(2);
+
+
+function connect(mapStateToParams, mergeParams) {
+    let mapStateToParamsFunc = mapStateToParams;
+    let mergeParamsFunc = mergeParams;
+    if (typeof mapStateToParamsFunc !== 'function') {
+        mapStateToParamsFunc = () => ({});
+    }
+    if (typeof mergeParamsFunc !== 'function') {
+        mergeParamsFunc = (stateParams, ownParams) => Object.assign({}, ownParams, stateParams);
+    }
+    return function(ViewModel) {
+        if (typeof ViewModel !== 'function') {
+            throw new TypeError('ViewModel must be function.');
+        }
+        return function (ownParams) {
+            const state = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__store__["b" /* getState */])();
+            const stateParams = mapStateToParamsFunc(state(), ownParams);
+            const mergedParams = mergeParamsFunc(stateParams, ownParams);
+            return new ViewModel(mergedParams);
+        };
+    };
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (connect);
+
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -6353,8 +6351,6 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 
 
 /***/ }),
-/* 19 */,
-/* 20 */,
 /* 21 */,
 /* 22 */,
 /* 23 */,
@@ -6368,48 +6364,71 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
 /* 31 */,
 /* 32 */,
 /* 33 */,
-/* 34 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 34 */,
+/* 35 */,
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_knockout__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setState", function() { return setState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return connect; });
 
 
-const stateObservable = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.observable({});
+var _taskInput = __webpack_require__(37);
 
-function setState(state) {
-    stateObservable(state);
-}
+var _taskInput2 = _interopRequireDefault(_taskInput);
 
-function getState() {
-    return stateObservable;
-}
+var _taskInputTemplate = __webpack_require__(38);
 
-function connect(mapStateToParams, mergeParams) {
-    let mapStateToParamsFunc = mapStateToParams;
-    let mergeParamsFunc = mergeParams;
-    if (typeof mapStateToParamsFunc !== 'function') {
-        mapStateToParamsFunc = () => ({});
+var _taskInputTemplate2 = _interopRequireDefault(_taskInputTemplate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+ko.components.register('task-input', { viewModel: _taskInput2.default, template: _taskInputTemplate2.default });
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _knockoutStore = __webpack_require__(0);
+
+function taskInputViewModel(params) {
+    var vm = {};
+    vm.taskInput = ko.observable();
+    function addTask() {
+        if (typeof vm.taskInput() !== 'undefined' && vm.taskInput().trim() !== '') {
+            params.selectedTasks.push(vm.taskInput());
+            vm.taskInput('');
+        }
     }
-    if (typeof mergeParamsFunc !== 'function') {
-        mergeParamsFunc = (stateParams, ownParams) => Object.assign({}, ownParams, stateParams);
-    }
-    return function(ViewModel) {
-        return function (params) {
-            const stateParams = mapStateToParamsFunc(stateObservable(), params);
-            const mergedParams = mergeParamsFunc(stateParams, params);
-            return new ViewModel(mergedParams);
-        };
-    };
+    vm.addTaskClick = addTask;
+    return vm;
 }
 
+function mapStateToParams(_ref) {
+    var selectedTasks = _ref.selectedTasks;
 
+    return { selectedTasks: selectedTasks };
+}
 
+exports.default = (0, _knockoutStore.connect)(mapStateToParams)(taskInputViewModel);
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"input-group\">\r\n    <input type=\"text\" class=\"form-control\" placeholder=\"Add a task...\" data-bind=\"value: taskInput\"></input>\r\n    <span class=\"input-group-btn\">\r\n        <button class=\"btn btn-default\" type=\"button\" data-bind=\"click: addTaskClick\">Add</button>\r\n    </span>\r\n</div>\r\n";
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

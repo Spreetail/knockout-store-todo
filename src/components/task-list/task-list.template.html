@@ -1,7 +1,12 @@
 <div data-bind="visible: projectSelected">
     <h1 data-bind="text: title"></h1>
-    <link-list params="items: tasks, selectHandler: markComplete"></link-list>
-    <div data-bind="visible: tasksEmpty">
-        <h3>All done!</h3>
+    <task-input></task-input>
+    <div class="task-list">
+        <div class="list-group" data-bind="foreach: tasks">
+            <a href="#" class="list-group-item" data-bind="text: $data, click: $parent.taskClicked"></a>
+        </div>
+        <div data-bind="visible: tasksEmpty">
+            <h3>All done!</h3>
+        </div>
     </div>
 </div>

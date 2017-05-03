@@ -1,7 +1,7 @@
 import { setState } from 'knockout-store';
+import projects from './data/projects';
 import 'bootstrap/dist/css/bootstrap.css';
 import './components/app';
-import projects from './data/projects';
 
 ko.deferUpdates = true;
 
@@ -11,16 +11,24 @@ const state = {
     selectedTasks: ko.observableArray([])
 };
 
-state.selectedProject.subscribe((newValue) => {
-    state.selectedTasks(projects[newValue]);
+state.selectedProject.subscribe((project) => {
+    state.selectedTasks(project.tasks());
 });
 
-state.selectedTasks.subscribe((newValue) => {
-    projects[state.selectedProject()] = newValue;
+state.selectedTasks.subscribe((tasks) => {
+    state.selectedProject().tasks(tasks);
 });
 
-ko.store.setState(state);
+setState(state);
+//simulated data fetch
+setTimeout(() => {
+    const observableProjects = projects.map(({ name, tasks }) => {
+        return {
+            name: ko.observable(name),
+            tasks: ko.observableArray(tasks)
+        };
+    });
+    state.projects(observableProjects);
+}, 100);
 
 ko.applyBindings();
-
-state.projects(Object.keys(projects));
