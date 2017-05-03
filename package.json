@@ -1,12 +1,12 @@
 {
-  "name": "ko-todo",
+  "name": "knockout-store-todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Todo example utilizing knockout-store.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "dev": "webpack --watch"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "knockout": "^3.4.2"
+    "knockout": "^3.4.2",
+    "knockout-store": "^1.0.0"
   }
 }
