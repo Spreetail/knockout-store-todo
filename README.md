@@ -7,3 +7,7 @@ to manage app state.
 It also uses [wepack](https://webpack.js.org/) to bundle files, including html templates.
 This allows for writing modular components that can update app state and react to changes
 without being coupled to other components.
+
+>Note: The view models in this project are defined with factory functions
+rather than constructors or classes which may look unfamiliar to Knockout developers.
+The other methods of defining view models also work just as well.
