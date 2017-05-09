@@ -9,16 +9,7 @@ ko.deferUpdates = true;
 const state = {
     projects: ko.observableArray([]),
     selectedProject: ko.observable(),
-    selectedTasks: ko.observableArray([])
 };
-
-state.selectedProject.subscribe((project) => {
-    state.selectedTasks(project.tasks());
-});
-
-state.selectedTasks.subscribe((tasks) => {
-    state.selectedProject().tasks(tasks);
-});
 
 setState(state);
 //simulated data fetch
@@ -26,7 +17,7 @@ setTimeout(() => {
     const observableProjects = projects.map(({ name, tasks }) => {
         return {
             name: ko.observable(name),
-            tasks: ko.observableArray(tasks)
+            tasks: ko.observableArray(tasks),
         };
     });
     state.projects(observableProjects);

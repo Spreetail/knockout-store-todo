@@ -6,7 +6,7 @@ function taskInputViewModel(params) {
     vm.taskInput = ko.observable();
     function addTask() {
         if (typeof vm.taskInput() !== 'undefined' && vm.taskInput().trim() !== '') {
-            params.selectedTasks.push(vm.taskInput());
+            params.selectedProject().tasks.push(vm.taskInput());
             vm.taskInput('');
         }
     }
@@ -14,8 +14,8 @@ function taskInputViewModel(params) {
     return vm;
 }
 
-function mapStateToParams({ selectedTasks }) {
-    return { selectedTasks };
+function mapStateToParams({ selectedProject }) {
+    return { selectedProject };
 }
 
 export default connect(mapStateToParams)(taskInputViewModel);

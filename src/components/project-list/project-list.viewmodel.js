@@ -1,4 +1,3 @@
-import ko from 'knockout';
 import { connect } from 'knockout-store';
 
 function projectListViewModel(params) {
