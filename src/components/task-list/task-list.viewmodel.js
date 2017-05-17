@@ -6,7 +6,7 @@ function taskListViewModel(params) {
     vm.projectSelected = ko.computed(() => typeof params.selectedProject() !== 'undefined');
     vm.title = ko.computed(() => {
         if (vm.projectSelected()) {
-            return params.selectedProject().name() + ' Title';
+            return params.selectedProject().name() + ' Tasks';
         }
         return '';
     });
